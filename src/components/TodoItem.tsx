@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ITodo } from "../interface";
+import { TodoContext } from "../App";
 
-const TodoItem: React.FC<ITodo> = ({ todo, toggleCompleted, deleteTodo }) => {
+const TodoItem: React.FC<ITodo> = ({ todo }) => {
+  const { toggleCompleted, deleteTodo } = useContext(TodoContext);
   const getTodoTitleStyle = () => {
     if (todo.completed) return "line-through";
     else return "";

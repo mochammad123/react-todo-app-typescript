@@ -15,3 +15,7 @@ export interface ITodo {
   toggleCompleted: (id: number) => void;
   deleteTodo: (id: number) => void;
 }
+
+export interface IAddTodo {
+  addTodo: (title: string) => void;
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { IDataTodo, ITodos } from "../interface";
 import TodoItem from "./TodoItem";
 
-const Todos: React.FC<ITodos> = ({ todos, toggleCompleted }) => {
+const Todos: React.FC<ITodos> = ({ todos, toggleCompleted, deleteTodo }) => {
   return (
     <div className="w-[40%] my-0 mx-auto">
       {todos.map((todo: IDataTodo) => {
@@ -11,6 +11,7 @@ const Todos: React.FC<ITodos> = ({ todos, toggleCompleted }) => {
             key={todo.id}
             todo={todo}
             toggleCompleted={toggleCompleted}
+            deleteTodo={deleteTodo}
           />
         );
       })}

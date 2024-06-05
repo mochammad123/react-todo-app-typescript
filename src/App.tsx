@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IDataTodo } from "./interface";
 import { todoData } from "./data/todosData";
+import Todos from "./components/Todos";
 
 const App = () => {
   const [todos, setTodos] = useState<IDataTodo[]>(todoData);
@@ -8,9 +9,7 @@ const App = () => {
   return (
     <div>
       <h1 className="text-xl font-bold">My Todo List</h1>
-      {todos.map((todo: IDataTodo) => {
-        return <p key={todo.id}>{todo.title}</p>;
-      })}
+      <Todos todos={todos} />
     </div>
   );
 };

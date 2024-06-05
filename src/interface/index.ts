@@ -3,3 +3,11 @@ export interface IDataTodo {
   title: string;
   completed: boolean;
 }
+
+export interface ITodos {
+  todos: IDataTodo[];
+}
+
+export interface ITodo {
+  todo: IDataTodo;
+}

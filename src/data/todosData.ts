@@ -3,7 +3,7 @@ import { IDataTodo } from "../interface";
 export const todoData: IDataTodo[] = [
   {
     id: 1,
-    title: "Finish Progate React Course",
+    title: "Finish Progate React Course ",
     completed: false,
   },
   {

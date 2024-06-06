@@ -1,29 +1,49 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ITodo } from "../interface";
-import { TodoContext } from "../App";
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  SwapLeftOutlined,
+} from "@ant-design/icons";
+import ButtonCard from "./button/ButtonCard";
+import { TodoContext } from "../pages/Todo";
+import ModalConfirm from "./modal/ModalDeleteConfirm";
 
 const TodoItem: React.FC<ITodo> = ({ todo }) => {
-  const { toggleCompleted, deleteTodo } = useContext(TodoContext);
-  const getTodoTitleStyle = () => {
-    if (todo.completed) return "line-through";
-    else return "";
-  };
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const { toggleCompleted, setShow, setDataEdit } = useContext(TodoContext);
 
   return (
-    <div className="border-2 border-sky-200 text-[24px] flex justify-between items-center py-0 px-[20px]">
-      <input
-        type="checkbox"
-        className="mr-[10px] h-[18px] w-[18px]"
-        onChange={() => toggleCompleted(todo.id)}
-      />
-      <p className={getTodoTitleStyle()}>{todo.title}</p>
-      <button
-        className="bg-red-500 text-white h-[30px] w-[30px] rounded-full cursor-pointer text-[16px]"
-        onClick={() => deleteTodo(todo.id)}
-      >
-        x
-      </button>
-    </div>
+    <>
+      <div className={`w-full bg-[#15101C] rounded-md p-2 text-[#9E78CF]`}>
+        <div className={`${todo.completed && "line-through"}`}>
+          {todo.title}
+        </div>
+        <div className="flex gap-5 mt-10 bottom-0">
+          <ButtonCard
+            icon={todo.completed ? <SwapLeftOutlined /> : <CheckOutlined />}
+            handleSubmit={() => toggleCompleted(todo.id)}
+          />
+          <ButtonCard
+            icon={<EditOutlined />}
+            handleSubmit={() => {
+              setShow(true);
+              setDataEdit(todo);
+            }}
+          />
+          <ButtonCard
+            icon={<DeleteOutlined />}
+            handleSubmit={() => {
+              setShowConfirm(true);
+              setDataEdit(todo);
+            }}
+          />
+        </div>
+      </div>
+
+      <ModalConfirm show={showConfirm} setShow={() => setShowConfirm(false)} />
+    </>
   );
 };
 
